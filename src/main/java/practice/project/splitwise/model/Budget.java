@@ -1,14 +1,10 @@
 package practice.project.splitwise.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 @Entity
-@Data
-@EqualsAndHashCode(callSuper = true)
 public class Budget extends BaseModel {
     
     @ManyToOne
@@ -32,6 +28,63 @@ public class Budget extends BaseModel {
     
     @Column(nullable = false)
     private Boolean isActive = true;
+    
+    // Manual getters and setters to ensure compilation
+    public Users getUser() {
+        return user;
+    }
+    
+    public void setUser(Users user) {
+        this.user = user;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+    
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
+    public Double getMonthlyLimit() {
+        return monthlyLimit;
+    }
+    
+    public void setMonthlyLimit(Double monthlyLimit) {
+        this.monthlyLimit = monthlyLimit;
+    }
+    
+    public Integer getMonth() {
+        return month;
+    }
+    
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+    
+    public Integer getYear() {
+        return year;
+    }
+    
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+    
+    public Double getAmountSpent() {
+        return amountSpent;
+    }
+    
+    public void setAmountSpent(Double amountSpent) {
+        this.amountSpent = amountSpent;
+    }
+    
+    public Boolean getIsActive() {
+        return isActive;
+    }
+    
+    public void setIsActive(Boolean isActive) {
+        this.isActive = isActive;
+    }
     
     // Helper method to get remaining budget
     public Double getRemainingBudget() {

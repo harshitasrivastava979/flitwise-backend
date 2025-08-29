@@ -1,20 +1,12 @@
 package practice.project.splitwise.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.util.Date;
 
 @MappedSuperclass
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public abstract class BaseModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,4 +31,28 @@ public abstract class BaseModel {
         updateDate = new Date();
     }
 
+    // Getters and Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 }

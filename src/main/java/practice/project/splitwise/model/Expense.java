@@ -4,20 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class Expense extends BaseModel {
     private double amount;
     private String description;
@@ -26,25 +18,18 @@ public class Expense extends BaseModel {
     private String category; // e.g., food, travel, etc.
     private String notes;
     private Date timestamp;
-   // private boolean recurring;
-   // private String interval; // e.g., daily, weekly, monthly
-   // private Date nextDueDate;
-
-
     private Boolean recurring;
-
-
     private String interval;
-
-
     private Date nextDueDate;
 
     @ManyToOne
     private Users paidBy;
 
-
     @OneToMany
     private List<UsersSplit> amountSplit;
+
+    public Expense() {
+    }
 
     public Expense(double amount, String description, Users paidBy) {
         this.amount = amount;
@@ -54,7 +39,6 @@ public class Expense extends BaseModel {
         newUserSplit.add(new UsersSplit(paidBy, amount, null, null));
         this.amountSplit = newUserSplit;
     }
-
 
     /**
      * @param users list of users among whom we have to split equally
@@ -71,5 +55,102 @@ public class Expense extends BaseModel {
         }
         this.setAmountSplit(usersSplits);
         return this;
+    }
+
+    // Getters and Setters
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Settled getIsSettled() {
+        return isSettled;
+    }
+
+    public void setIsSettled(Settled isSettled) {
+        this.isSettled = isSettled;
+    }
+
+    public String getSplitType() {
+        return splitType;
+    }
+
+    public void setSplitType(String splitType) {
+        this.splitType = splitType;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public Boolean getRecurring() {
+        return recurring;
+    }
+
+    public void setRecurring(Boolean recurring) {
+        this.recurring = recurring;
+    }
+
+    public String getInterval() {
+        return interval;
+    }
+
+    public void setInterval(String interval) {
+        this.interval = interval;
+    }
+
+    public Date getNextDueDate() {
+        return nextDueDate;
+    }
+
+    public void setNextDueDate(Date nextDueDate) {
+        this.nextDueDate = nextDueDate;
+    }
+
+    public Users getPaidBy() {
+        return paidBy;
+    }
+
+    public void setPaidBy(Users paidBy) {
+        this.paidBy = paidBy;
+    }
+
+    public List<UsersSplit> getAmountSplit() {
+        return amountSplit;
+    }
+
+    public void setAmountSplit(List<UsersSplit> amountSplit) {
+        this.amountSplit = amountSplit;
     }
 }
