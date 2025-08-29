@@ -71,21 +71,38 @@ public class SecurityConfig {
         return source;
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .authenticationProvider(authenticationProvider())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/actuator/**", "/error").permitAll()
-                .requestMatchers("/api/budget/**").authenticated() // Require authentication for budget endpoints
-                .requestMatchers("/api/users/**").authenticated() // Require authentication for user endpoints
-                .requestMatchers("/api/groups/**", "/api/expenses", "/api/addExpense", "/api/settleUp/**", "/api/createGroup").authenticated() // Require authentication for all group endpoints
-                .anyRequest().authenticated()
-            )
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .csrf(csrf -> csrf.disable())
+        .authenticationProvider(authenticationProvider())
+        .authorizeHttpRequests(auth -> auth
+            // Allow preflight OPTIONS requests for all endpoints
+            .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+            
+            // Public endpoints
+            .requestMatchers("/api/auth/**",
+                             "/v3/api-docs/**",
+                             "/swagger-ui/**",
+                             "/swagger-ui.html",
+                             "/swagger-resources/**",
+                             "/webjars/**",
+                             "/actuator/**",
+                             "/error").permitAll()
+
+            // Protected endpoints
+            .requestMatchers("/api/budget/**").authenticated()
+            .requestMatchers("/api/users/**").authenticated()
+            .requestMatchers("/api/groups/**", "/api/expenses", "/api/addExpense", "/api/settleUp/**", "/api/createGroup").authenticated()
+            .anyRequest().authenticated()
+        )
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+    // JWT filter runs after CORS
+    http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
+    return http.build();
+}
+
 } 
