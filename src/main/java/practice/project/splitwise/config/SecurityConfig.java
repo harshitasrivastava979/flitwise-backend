@@ -58,7 +58,8 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(Arrays.asList(
             "http://localhost:5173",  // Vite dev server
             "http://127.0.0.1:5173",  // Alternative localhost
-            "http://localhost:3000"   // React dev server (if needed)
+            "http://localhost:3000",
+            "https://flitwisefrontend1.onrender.com"   // React dev server (if needed)
         ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
