@@ -1,0 +1,18 @@
+# Maven target folder
+/target/
+
+# Logs
+*.log
+
+# IntelliJ / Eclipse files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# MacOS files
+.DS_Store
+
+# Env files
+.env
