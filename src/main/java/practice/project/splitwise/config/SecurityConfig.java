@@ -89,6 +89,8 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
                              "/swagger-resources/**",
                              "/webjars/**",
                              "/actuator/**",
+                             "/health",
+                             "/ping",
                              "/error").permitAll()
 
             // Protected endpoints
