@@ -176,7 +176,7 @@ public class OtpService {
                         "This code will expire in %d minutes.\n" +
                         "If you didn't request this code, please ignore this email.\n\n" +
                         "Best regards,\n" +
-                        "FinSight Team",
+                        "Flitwise Team",
                 userName, purpose, otpCode, otpExpiryMinutes
         );
     }
