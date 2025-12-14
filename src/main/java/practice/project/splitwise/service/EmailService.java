@@ -20,7 +20,7 @@ public class EmailService {
             message.setTo(to);
             message.setSubject(subject);
             message.setText(text);
-            message.setFrom("noreply@flitwise.app"); // Use your configured email
+            message.setFrom("flitwise@gmail.com"); // Use your configured email
 
             mailSender.send(message);
         } catch (Exception e) {
