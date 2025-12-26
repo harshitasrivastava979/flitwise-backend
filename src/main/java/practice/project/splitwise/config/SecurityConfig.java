@@ -79,7 +79,7 @@ public class SecurityConfig {
 
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable()) // ✅ REQUIRED for JWT
+            .csrf(csrf -> csrf.disable())
             .sessionManagement(session ->
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             )
